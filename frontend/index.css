@@ -1,0 +1,125 @@
+/* index.css — Role Selection Landing Page */
+:root {
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+    --border: #e2e8f0;
+    --text-dark: #0f172a;
+    --text-muted: #64748b;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #dbeafe 0%, #f1f5f9 50%, #e0e7ff 100%);
+    padding: 20px;
+}
+
+.logo {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.subtitle {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    margin-bottom: 48px;
+    text-align: center;
+}
+
+.role-cards {
+    display: flex;
+    gap: 28px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.role-card {
+    background: white;
+    border: 2px solid var(--border);
+    border-radius: 20px;
+    padding: 40px 36px;
+    width: 280px;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.25s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.role-card:hover {
+    border-color: var(--primary);
+    transform: translateY(-6px);
+    box-shadow: 0 12px 32px rgba(37, 99, 235, 0.18);
+}
+
+.role-icon {
+    width: 72px;
+    height: 72px;
+    border-radius: 20px;
+    background: rgba(37, 99, 235, 0.1);
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    transition: background 0.25s;
+}
+
+.role-card:hover .role-icon {
+    background: var(--primary);
+    color: white;
+}
+
+.role-card h2 {
+    font-size: 1.4rem;
+    color: var(--text-dark);
+}
+
+.role-card p {
+    color: var(--text-muted);
+    font-size: 0.92rem;
+    line-height: 1.5;
+}
+
+.role-card .go-btn {
+    margin-top: 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--primary);
+    color: white;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: background 0.2s;
+}
+
+.role-card:hover .go-btn {
+    background: var(--primary-dark);
+}
+
+.footer-note {
+    margin-top: 40px;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+@media (max-width: 640px) {
+    .role-cards { flex-direction: column; align-items: center; }
+    .role-card { width: 100%; max-width: 320px; }
+}

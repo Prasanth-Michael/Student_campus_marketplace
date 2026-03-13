@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buyer Dashboard - CampusConnect</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <i class="fa-solid fa-graduation-cap"></i> CampusMkt
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item active"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
+                <a href="browse.html" class="nav-item"><i class="fa-solid fa-compass"></i> Browse Services</a>
+                <a href="orders.html" class="nav-item"><i class="fa-solid fa-bag-shopping"></i> My Orders</a>
+                <a href="chat.html" class="nav-item"><i class="fa-solid fa-comments"></i> Chat</a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="login.html" class="nav-item" data-action="logout" style="color: var(--danger);"><i class="fa-solid fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="page-header">
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <button class="mobile-toggle" id="mobile-toggle"><i class="fa-solid fa-bars"></i></button>
+                    <h1 class="page-title">Dashboard</h1>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px; font-weight: 500;">
+                    <img src="https://i.pravatar.cc/150?img=32" alt="Profile" style="width: 40px; border-radius: 50%;">
+                    <span id="buyer-profile-name">Buyer</span>
+                </div>
+            </header>
+
+            <div class="kpi-grid">
+                <div class="card kpi-card">
+                    <div class="kpi-icon"><i class="fa-solid fa-bag-shopping"></i></div>
+                    <div class="kpi-info">
+                        <h3>Total Orders</h3>
+                        <div class="value" id="buyer-total-orders">0</div>
+                    </div>
+                </div>
+                <div class="card kpi-card">
+                    <div class="kpi-icon" style="background: #fef3c7; color: var(--warning);"><i class="fa-solid fa-clock"></i></div>
+                    <div class="kpi-info">
+                        <h3>In Progress</h3>
+                        <div class="value" id="buyer-active-orders">0</div>
+                    </div>
+                </div>
+                <div class="card kpi-card">
+                    <div class="kpi-icon" style="background: #d1fae5; color: var(--success);"><i class="fa-solid fa-check-circle"></i></div>
+                    <div class="kpi-info">
+                        <h3>Completed Orders</h3>
+                        <div class="value" id="buyer-completed-orders">0</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2 style="font-size: 1.25rem; margin-bottom: 16px;">Recent Activity</h2>
+                <div id="buyer-recent-activity" style="display: flex; flex-direction: column; gap: 16px;">
+                    <p>Loading your orders...</p>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="../shared/app.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Provider Register - CampusMkt</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body style="display: flex; justify-content: center; align-items: center; background-color: var(--secondary);">
+    <div class="card" style="width: 100%; max-width: 420px; padding: 40px; text-align: center;">
+        <div style="font-size: 2rem; color: var(--primary); margin-bottom: 24px; display: flex; align-items: center; justify-content: center; gap: 12px; font-weight: 700;">
+            <i class="fa-solid fa-graduation-cap"></i> CampusMkt
+        </div>
+        <h2 style="margin-bottom: 8px;">Create Provider Account</h2>
+        <p style="margin-bottom: 32px;">Start offering your campus services today.</p>
+
+        <form id="register-form" style="text-align: left;">
+            <div class="form-group">
+                <label for="provider-name">Full Name</label>
+                <input id="provider-name" type="text" placeholder="Alex Provider" required>
+            </div>
+            <div class="form-group">
+                <label for="provider-register-email">Email Address</label>
+                <input id="provider-register-email" type="email" placeholder="provider@university.edu" required>
+            </div>
+            <div class="form-group">
+                <label for="provider-department">Department</label>
+                <input id="provider-department" type="text" placeholder="Computer Science">
+            </div>
+            <div class="form-group">
+                <label for="provider-bio">Bio</label>
+                <input id="provider-bio" type="text" placeholder="Tutoring, design, repairs...">
+            </div>
+            <div class="form-group">
+                <label for="provider-register-password">Password</label>
+                <input id="provider-register-password" type="password" placeholder="Create password" required>
+            </div>
+            <button id="register-submit" type="submit" class="btn btn-primary btn-block" style="margin-top: 10px;">Create Account</button>
+        </form>
+        <p id="auth-status" style="margin-top: 16px; min-height: 24px;"></p>
+        <p style="margin-top: 16px;">
+            Already registered? <a href="login.html" style="color: var(--primary); font-weight: 600; text-decoration: none;">Login here</a>
+        </p>
+    </div>
+    <script src="../shared/app.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

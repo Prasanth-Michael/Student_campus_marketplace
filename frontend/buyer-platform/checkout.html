@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - CampusConnect</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <i class="fa-solid fa-graduation-cap"></i> CampusMkt
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
+                <a href="browse.html" class="nav-item"><i class="fa-solid fa-compass"></i> Browse Services</a>
+                <a href="orders.html" class="nav-item"><i class="fa-solid fa-bag-shopping"></i> My Orders</a>
+                <a href="chat.html" class="nav-item"><i class="fa-solid fa-comments"></i> Chat</a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="login.html" class="nav-item" data-action="logout" style="color: var(--danger);"><i class="fa-solid fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="page-header">
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <button class="mobile-toggle" id="mobile-toggle"><i class="fa-solid fa-bars"></i></button>
+                    <h1 class="page-title">Checkout</h1>
+                </div>
+            </header>
+
+            <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 32px; max-width: 900px;">
+                <form id="checkout-form">
+                    <div class="card" style="margin-bottom: 24px;">
+                        <h3 style="font-size: 1.1rem; margin-bottom: 16px;">Service Being Ordered</h3>
+                        <div id="checkout-service-summary"></div>
+                    </div>
+
+                    <div class="card" style="margin-bottom: 24px;">
+                        <h3 style="font-size: 1.1rem; margin-bottom: 12px;">Requirements</h3>
+                        <div class="form-group">
+                            <textarea id="order-requirements" rows="4" placeholder="Describe what you need help with..." required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="campus-location">Campus Location</label>
+                            <input id="campus-location" type="text" placeholder="Library, Hostel A, Cafeteria">
+                        </div>
+                        <div class="form-group" style="margin-bottom: 0;">
+                            <label for="scheduled-for">Scheduled For</label>
+                            <input id="scheduled-for" type="datetime-local">
+                        </div>
+                    </div>
+
+                    <div class="card" style="background: #eff6ff; border-color: var(--primary);">
+                        <h3 style="font-size: 1.1rem; color: var(--primary); margin-bottom: 8px;"><i class="fa-solid fa-lock"></i> Razorpay Secure Payment</h3>
+                        <p style="margin-bottom: 20px; font-size: 0.9rem;">Place the order and complete payment securely through Razorpay.</p>
+                        <button id="pay-button" type="submit" class="btn btn-primary btn-block" style="padding: 14px; font-size: 1rem;">
+                            Pay Now
+                        </button>
+                    </div>
+                </form>
+
+                <div>
+                    <div class="card" style="position: sticky; top: 32px;">
+                        <h3 style="font-size: 1.1rem; margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--border);">Price Summary</h3>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+                            <span>Base Price</span><span id="checkout-base-price"></span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 20px; color: var(--text-muted); font-size: 0.9rem;">
+                            <span>Platform Fee</span><span>Free</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; font-weight: 700; font-size: 1.25rem; padding-top: 16px; border-top: 1px solid var(--border);">
+                            <span>Total</span><span id="checkout-total"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script src="../shared/app.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

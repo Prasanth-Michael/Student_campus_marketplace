@@ -1,4 +1,5 @@
 const http = require("http");
+const path = require("path");
 
 const cors = require("cors");
 const dotenv = require("dotenv");
@@ -19,11 +20,32 @@ connectDB();
 
 const app = express();
 const server = http.createServer(app);
+const frontendPath = path.join(__dirname, "..", "frontend");
+const PORT = process.env.PORT || 5000;
 
-const allowedOrigin = process.env.CLIENT_URL || "*";
+const allowedOrigins = new Set(
+  [
+    process.env.CLIENT_URL,
+    `http://localhost:${PORT}`,
+    `http://127.0.0.1:${PORT}`,
+    "http://localhost:5500",
+    "http://127.0.0.1:5500"
+  ].filter(Boolean)
+);
+
+const isAllowedOrigin = (origin) => {
+  return !origin || allowedOrigins.has(origin);
+};
+
 const io = new Server(server, {
   cors: {
-    origin: allowedOrigin,
+    origin: (origin, callback) => {
+      if (isAllowedOrigin(origin)) {
+        return callback(null, true);
+      }
+
+      return callback(new Error("Socket origin not allowed"));
+    },
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"]
   }
 });
@@ -32,25 +54,35 @@ app.set("io", io);
 
 app.use(
   cors({
-    origin: allowedOrigin,
+    origin: (origin, callback) => {
+      if (isAllowedOrigin(origin)) {
+        return callback(null, true);
+      }
+
+      return callback(new Error("Origin not allowed"));
+    },
     credentials: true
   })
 );
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
+app.use(express.static(frontendPath));
 
 app.get("/", (req, res) => {
-  res.json({
-    message: "Campus Service Marketplace API is running",
-    docs: "/api/health"
-  });
+  res.sendFile(path.join(frontendPath, "index.html"));
 });
 
 app.get("/api/health", (req, res) => {
   res.json({
     success: true,
     timestamp: new Date().toISOString()
+  });
+});
+
+app.get("/api/config/client", (req, res) => {
+  res.json({
+    razorpayKeyId: process.env.RAZORPAY_KEY_ID || ""
   });
 });
 
@@ -73,7 +105,6 @@ app.use((error, req, res, next) => {
 
 initializeChatSocket(io);
 
-const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
 });

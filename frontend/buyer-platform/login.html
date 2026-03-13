@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buyer Login - CampusConnect</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="auth-wrapper">
+        <div class="card" style="width: 100%; max-width: 420px;">
+            <div style="text-align: center; margin-bottom: 28px;">
+                <div style="font-size: 1.5rem; font-weight: 700; color: var(--primary); display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 6px;">
+                    <i class="fa-solid fa-graduation-cap"></i> CampusConnect
+                </div>
+                <p>Login to your buyer account</p>
+            </div>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="buyer-email">University Email</label>
+                    <input id="buyer-email" type="email" placeholder="student@university.edu" required>
+                </div>
+                <div class="form-group">
+                    <label for="buyer-password">Password</label>
+                    <input id="buyer-password" type="password" placeholder="Enter password" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block" id="login-submit" style="margin-top: 8px; padding: 13px;">Sign In</button>
+            </form>
+            <p id="auth-status" style="text-align: center; margin-top: 16px; min-height: 24px;"></p>
+            <p style="text-align: center; margin-top: 20px;">
+                New to CampusConnect? <a href="register.html" style="color: var(--primary); font-weight: 600; text-decoration: none;">Create buyer account</a>
+            </p>
+        </div>
+    </div>
+    <script src="../shared/app.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

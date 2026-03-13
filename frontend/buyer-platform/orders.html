@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Orders - CampusConnect</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/orders.css">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <i class="fa-solid fa-graduation-cap"></i> CampusMkt
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
+                <a href="browse.html" class="nav-item"><i class="fa-solid fa-compass"></i> Browse Services</a>
+                <a href="orders.html" class="nav-item active"><i class="fa-solid fa-bag-shopping"></i> My Orders</a>
+                <a href="chat.html" class="nav-item"><i class="fa-solid fa-comments"></i> Chat</a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="login.html" class="nav-item" data-action="logout" style="color: var(--danger);"><i class="fa-solid fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="page-header">
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <button class="mobile-toggle" id="mobile-toggle"><i class="fa-solid fa-bars"></i></button>
+                    <h1 class="page-title">My Orders</h1>
+                </div>
+            </header>
+
+            <div id="buyer-orders-list" style="display: flex; flex-direction: column; gap: 20px; max-width: 900px;">
+                <p>Loading orders...</p>
+            </div>
+        </main>
+    </div>
+
+    <div class="modal-overlay" id="review-modal">
+        <div class="modal-box">
+            <h2 style="text-align: center; margin-bottom: 8px;">Rate Your Experience</h2>
+            <p id="review-service-name" style="text-align: center;">Choose a rating for this order.</p>
+
+            <div id="star-rating">
+                <i class="fa-solid fa-star" data-value="1"></i>
+                <i class="fa-solid fa-star" data-value="2"></i>
+                <i class="fa-solid fa-star" data-value="3"></i>
+                <i class="fa-solid fa-star" data-value="4"></i>
+                <i class="fa-solid fa-star" data-value="5"></i>
+            </div>
+
+            <div class="form-group">
+                <textarea id="review-comment" rows="3" placeholder="Write a brief comment (optional)..."></textarea>
+            </div>
+
+            <div style="display: flex; gap: 12px; margin-top: 8px;">
+                <button id="review-cancel" class="btn btn-secondary btn-block">Cancel</button>
+                <button id="review-submit" class="btn btn-primary btn-block">Submit</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../shared/app.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
