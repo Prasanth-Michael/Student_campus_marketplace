@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders - CampusMkt</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .order-card {
+            border-left: 4px solid var(--border);
+        }
+        .order-card.pending { border-left-color: #d97706; }
+        .order-card.active { border-left-color: var(--primary); }
+        .order-card.completed { border-left-color: var(--success); }
+        
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+        .customer-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .customer-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .order-details {
+            margin-bottom: 20px;
+        }
+        .order-details strong {
+            display: block;
+            margin-bottom: 4px;
+            color: var(--text-dark);
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <i class="fa-solid fa-graduation-cap"></i> CampusMkt
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
+                <a href="create-service.html" class="nav-item"><i class="fa-solid fa-plus-circle"></i> Create Service</a>
+                <a href="services.html" class="nav-item"><i class="fa-solid fa-box-open"></i> My Services</a>
+                <a href="orders.html" class="nav-item active"><i class="fa-solid fa-list-check"></i> Orders</a>
+                <a href="chat.html" class="nav-item"><i class="fa-solid fa-comments"></i> Chat</a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="login.html" class="nav-item" style="color: var(--danger);"><i class="fa-solid fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="page-header">
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <button class="mobile-toggle" id="mobile-toggle"><i class="fa-solid fa-bars"></i></button>
+                    <h1 class="page-title">Manage Orders</h1>
+                </div>
+            </header>
+
+            <div class="data-grid">
+                <!-- Pending Order -->
+                <div class="card order-card pending">
+                    <div class="order-header">
+                        <div class="customer-info">
+                            <img src="https://i.pravatar.cc/150?img=32" alt="Customer" class="customer-avatar">
+                            <div>
+                                <h4 style="margin-bottom: 2px;">Sarah Jenkins</h4>
+                                <span style="font-size: 0.8rem; color: var(--text-muted);">Hostel A, Room 201</span>
+                            </div>
+                        </div>
+                        <span class="badge badge-pending">New Request</span>
+                    </div>
+                    <div class="order-details">
+                        <strong>Calculus 101 Tutoring</strong>
+                        <p>Total: $15.00</p>
+                    </div>
+                    <div style="display: flex; gap: 10px;">
+                        <button class="btn btn-primary" style="flex: 1;"><i class="fa-solid fa-check"></i> Accept</button>
+                        <button class="btn btn-secondary">Decline</button>
+                    </div>
+                </div>
+
+                <!-- Active Order -->
+                <div class="card order-card active">
+                    <div class="order-header">
+                        <div class="customer-info">
+                            <img src="https://i.pravatar.cc/150?img=12" alt="Customer" class="customer-avatar">
+                            <div>
+                                <h4 style="margin-bottom: 2px;">Mike Ross</h4>
+                                <span style="font-size: 0.8rem; color: var(--text-muted);">Law Building Library</span>
+                            </div>
+                        </div>
+                        <span class="badge badge-active">In Progress</span>
+                    </div>
+                    <div class="order-details">
+                        <strong>Late Night Snack Delivery</strong>
+                        <p>Total: $8.50</p>
+                    </div>
+                    <div style="display: flex; gap: 10px;">
+                        <button class="btn btn-success" style="flex: 1;"><i class="fa-solid fa-flag-checkered"></i> Mark Completed</button>
+                        <a href="chat.html" class="btn btn-secondary"><i class="fa-solid fa-comment"></i> Chat</a>
+                    </div>
+                </div>
+                
+                <!-- Completed Order -->
+                <div class="card order-card completed">
+                    <div class="order-header">
+                        <div class="customer-info">
+                            <img src="https://i.pravatar.cc/150?img=5" alt="Customer" class="customer-avatar">
+                            <div>
+                                <h4 style="margin-bottom: 2px;">Jessica Lee</h4>
+                                <span style="font-size: 0.8rem; color: var(--text-muted);">Off campus</span>
+                            </div>
+                        </div>
+                        <span class="badge badge-completed">Completed</span>
+                    </div>
+                    <div class="order-details">
+                        <strong>Macbook Formatting</strong>
+                        <p>Total: $30.00 • Paid via Razorpay</p>
+                    </div>
+                    <div>
+                        <button class="btn btn-secondary btn-block" disabled><i class="fa-solid fa-star"></i> 5 Star Review Left</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="js/script.js"></script>
+</body>
+</html>

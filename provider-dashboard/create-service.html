@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Service - CampusMkt</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <i class="fa-solid fa-graduation-cap"></i> CampusMkt
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
+                <a href="create-service.html" class="nav-item active"><i class="fa-solid fa-plus-circle"></i> Create Service</a>
+                <a href="services.html" class="nav-item"><i class="fa-solid fa-box-open"></i> My Services</a>
+                <a href="orders.html" class="nav-item"><i class="fa-solid fa-list-check"></i> Orders</a>
+                <a href="chat.html" class="nav-item"><i class="fa-solid fa-comments"></i> Chat</a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="login.html" class="nav-item" style="color: var(--danger);"><i class="fa-solid fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="page-header">
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <button class="mobile-toggle" id="mobile-toggle"><i class="fa-solid fa-bars"></i></button>
+                    <h1 class="page-title">Create New Service</h1>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px; font-weight: 500;">
+                    <img src="https://i.pravatar.cc/150?img=11" alt="Profile" style="width: 40px; border-radius: 50%;">
+                    <span>Alex Provider</span>
+                </div>
+            </header>
+
+            <div class="card" style="max-width: 600px;">
+                <p style="margin-bottom: 24px;">Offer a new service to students on campus. Fill out the details below.</p>
+                
+                <form id="create-form">
+                    <div class="form-group">
+                        <label>Service Title</label>
+                        <input type="text" placeholder="e.g. Graphic Design for Posters" required>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                        <div class="form-group">
+                            <label>Category</label>
+                            <select required>
+                                <option value="" disabled selected>Select an option</option>
+                                <option>Tutoring</option>
+                                <option>Laptop Repair</option>
+                                <option>Printing</option>
+                                <option>Food Delivery</option>
+                                <option>Assignment Help</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Price ($)</label>
+                            <input type="number" placeholder="20.00" min="0" step="0.5" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea rows="4" placeholder="Describe the scope of your service..." required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-block"><i class="fa-solid fa-upload"></i> Publish Service</button>
+                </form>
+            </div>
+        </main>
+    </div>
+    <script src="js/script.js"></script>
+</body>
+</html>

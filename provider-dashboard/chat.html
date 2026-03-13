@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat - CampusMkt</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .chat-container {
+            display: flex;
+            flex-direction: column;
+            height: calc(100vh - 140px);
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .chat-header {
+            padding: 16px 24px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: #f8fafc;
+        }
+        .chat-header img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+        .chat-header h3 { font-size: 1.1rem; margin-bottom: 2px; }
+        .chat-header span { font-size: 0.8rem; color: var(--success); }
+        
+        .chat-messages {
+            flex: 1;
+            padding: 24px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            background: #f1f5f9;
+        }
+        
+        .message {
+            display: flex;
+            flex-direction: column;
+            max-width: 70%;
+        }
+        .message.received { align-self: flex-start; }
+        .message.sent { align-self: flex-end; align-items: flex-end; }
+        
+        .msg-bubble {
+            padding: 12px 16px;
+            border-radius: 16px;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+        .message.received .msg-bubble { 
+            background: white; 
+            border: 1px solid var(--border);
+            border-bottom-left-radius: 4px;
+        }
+        .message.sent .msg-bubble { 
+            background: var(--primary); 
+            color: white; 
+            border-bottom-right-radius: 4px;
+        }
+        
+        .msg-time {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 6px;
+            padding: 0 4px;
+        }
+        
+        .chat-input-area {
+            padding: 20px;
+            background: white;
+            border-top: 1px solid var(--border);
+        }
+        
+        .chat-form {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .chat-input {
+            flex: 1;
+            padding: 12px 20px;
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            outline: none;
+            background: #f8fafc;
+        }
+        .chat-input:focus {
+            border-color: var(--primary);
+            background: white;
+        }
+        
+        .send-btn {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            border: none;
+            background: var(--primary);
+            color: white;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.1rem;
+            transition: background 0.2s;
+        }
+        .send-btn:hover { background: var(--primary-hover); }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <i class="fa-solid fa-graduation-cap"></i> CampusMkt
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
+                <a href="create-service.html" class="nav-item"><i class="fa-solid fa-plus-circle"></i> Create Service</a>
+                <a href="services.html" class="nav-item"><i class="fa-solid fa-box-open"></i> My Services</a>
+                <a href="orders.html" class="nav-item"><i class="fa-solid fa-list-check"></i> Orders</a>
+                <a href="chat.html" class="nav-item active"><i class="fa-solid fa-comments"></i> Chat</a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="login.html" class="nav-item" style="color: var(--danger);"><i class="fa-solid fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="page-header" style="margin-bottom: 20px;">
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <button class="mobile-toggle" id="mobile-toggle"><i class="fa-solid fa-bars"></i></button>
+                    <h1 class="page-title">Messages</h1>
+                </div>
+            </header>
+
+            <div class="chat-container">
+                <div class="chat-header">
+                    <img src="https://i.pravatar.cc/150?img=32" alt="Customer">
+                    <div>
+                        <h3>Sarah Jenkins</h3>
+                        <span><i class="fa-solid fa-circle" style="font-size: 0.5rem; vertical-align: middle;"></i> Online • Viewing Order</span>
+                    </div>
+                </div>
+                
+                <div class="chat-messages" id="chat-messages">
+                    <div class="message received">
+                        <div class="msg-bubble">Hi, I just requested tutoring for Calculus 101. Are you available today evening?</div>
+                        <span class="msg-time">2:14 PM</span>
+                    </div>
+                    <div class="message sent">
+                        <div class="msg-bubble">Hello Sarah! Yes, I am available. We can meet in the Main Library at 6 PM if that works for you.</div>
+                        <span class="msg-time">2:16 PM</span>
+                    </div>
+                    <div class="message received">
+                        <div class="msg-bubble">Perfect, 6 PM library works for me. Should I bring the mid-term syllabus?</div>
+                        <span class="msg-time">2:18 PM</span>
+                    </div>
+                </div>
+                
+                <div class="chat-input-area">
+                    <form class="chat-form" id="chat-form">
+                        <input type="text" class="chat-input" id="chat-input" placeholder="Type your message here..." autocomplete="off">
+                        <button type="submit" class="send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="js/script.js"></script>
+</body>
+</html>

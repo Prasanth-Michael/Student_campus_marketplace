@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Details - CampusConnect</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <i class="fa-solid fa-graduation-cap"></i> CampusMkt
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
+                <a href="browse.html" class="nav-item active"><i class="fa-solid fa-compass"></i> Browse Services</a>
+                <a href="orders.html" class="nav-item"><i class="fa-solid fa-bag-shopping"></i> My Orders</a>
+                <a href="chat.html" class="nav-item"><i class="fa-solid fa-comments"></i> Chat</a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="login.html" class="nav-item" style="color: var(--danger);"><i class="fa-solid fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="page-header">
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <button class="mobile-toggle" id="mobile-toggle"><i class="fa-solid fa-bars"></i></button>
+                    <a href="browse.html" style="color: var(--text-muted); text-decoration: none; font-size: 0.9rem;"><i class="fa-solid fa-arrow-left"></i> Back to Services</a>
+                </div>
+            </header>
+
+            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 32px; max-width: 1000px;">
+                <div>
+                    <h1 style="font-size: 2rem; margin-bottom: 16px;">Calculus 101 Mid-term Tutoring</h1>
+
+                    <div style="display: flex; gap: 24px; padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 24px; align-items: center;">
+                        <img src="https://i.pravatar.cc/150?img=11" alt="Alex" style="width: 52px; border-radius: 50%;">
+                        <div>
+                            <div style="font-weight: 700;">Alex Provider</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Computer Science Senior</div>
+                        </div>
+                        <div style="border-left: 1px solid var(--border); padding-left: 24px; margin-left: auto;">
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Rating</div>
+                            <span class="rating"><i class="fa-solid fa-star"></i> 4.9 (12 reviews)</span>
+                        </div>
+                    </div>
+
+                    <h3>About This Service</h3>
+                    <p style="margin-top: 12px; margin-bottom: 24px; line-height: 1.7;">
+                        Struggling with limits, derivatives, or integration? As a Senior CS student with an A+ in Calc 101, I know exactly what the professor tests. In this highly interactive 1-hour session, we'll work through practice exams, clarify core concepts, and focus on high-yield topics.
+                    </p>
+
+                    <h3>What's Included</h3>
+                    <ul style="margin-top: 12px; padding-left: 20px; color: var(--text-muted); line-height: 2;">
+                        <li>1 Hour 1-on-1 session (Library or Online)</li>
+                        <li>PDF of curated practice problems</li>
+                        <li>Step-by-step breakdown methodology</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <div class="card" style="position: sticky; top: 32px;">
+                        <div style="font-size: 2rem; font-weight: 700; color: var(--primary); margin-bottom: 4px;">₹500</div>
+                        <p style="font-size: 0.9rem; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid var(--border);">Per 1-Hour Session</p>
+
+                        <a href="checkout.html" class="btn btn-primary btn-block" style="margin-bottom: 10px;">Order Now</a>
+                        <a href="chat.html" class="btn btn-secondary btn-block"><i class="fa-solid fa-comment"></i> Message Alex</a>
+
+                        <p style="font-size: 0.8rem; color: var(--text-muted); text-align: center; margin-top: 16px;">
+                            <i class="fa-solid fa-shield-halved"></i> Secured by CampusConnect
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="js/script.js"></script>
+</body>
+</html>

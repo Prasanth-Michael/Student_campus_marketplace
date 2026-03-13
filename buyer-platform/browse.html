@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Services - CampusConnect</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <i class="fa-solid fa-graduation-cap"></i> CampusMkt
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
+                <a href="browse.html" class="nav-item active"><i class="fa-solid fa-compass"></i> Browse Services</a>
+                <a href="orders.html" class="nav-item"><i class="fa-solid fa-bag-shopping"></i> My Orders</a>
+                <a href="chat.html" class="nav-item"><i class="fa-solid fa-comments"></i> Chat</a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="login.html" class="nav-item" style="color: var(--danger);"><i class="fa-solid fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="page-header">
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <button class="mobile-toggle" id="mobile-toggle"><i class="fa-solid fa-bars"></i></button>
+                    <h1 class="page-title">Browse Services</h1>
+                </div>
+                <div style="position: relative; width: 280px;">
+                    <i class="fa-solid fa-search" style="position: absolute; left: 14px; top: 13px; color: var(--text-muted);"></i>
+                    <input type="text" placeholder="Search services..." style="padding-left: 40px; border-radius: 20px;">
+                </div>
+            </header>
+
+            <!-- Category pills -->
+            <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px;">
+                <button class="btn btn-primary" style="border-radius: 20px; padding: 6px 14px; font-size: 0.85rem;">All</button>
+                <button class="btn btn-secondary" style="border-radius: 20px; padding: 6px 14px; font-size: 0.85rem;">Tutoring</button>
+                <button class="btn btn-secondary" style="border-radius: 20px; padding: 6px 14px; font-size: 0.85rem;">Tech Repair</button>
+                <button class="btn btn-secondary" style="border-radius: 20px; padding: 6px 14px; font-size: 0.85rem;">Printing</button>
+                <button class="btn btn-secondary" style="border-radius: 20px; padding: 6px 14px; font-size: 0.85rem;">Food Delivery</button>
+            </div>
+
+            <div class="data-grid">
+                <!-- Card 1 -->
+                <div class="card" style="display: flex; flex-direction: column; gap: 12px; transition: all 0.2s;" onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='var(--shadow-md)'" onmouseout="this.style.transform=''; this.style.boxShadow=''">
+                    <div>
+                        <span class="badge badge-active" style="margin-bottom: 10px; display: inline-block;">Tutoring</span>
+                        <h3 style="font-size: 1.1rem; margin-bottom: 8px;">Calculus 101 Mid-term Tutoring</h3>
+                        <div style="display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 8px;">
+                            <img src="https://i.pravatar.cc/150?img=11" alt="" style="width: 24px; border-radius: 50%;"> Alex P. — CS Senior
+                        </div>
+                        <p style="font-size: 0.9rem;">1-on-1 session covering key concepts, practice problems & exam strategies.</p>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 12px; border-top: 1px solid var(--border);">
+                        <span style="font-size: 1.2rem; font-weight: 700; color: var(--primary);">₹500 <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 400;">/hr</span></span>
+                        <span class="rating"><i class="fa-solid fa-star"></i> 4.9 <span style="color: var(--text-muted); font-weight: 400;">(12)</span></span>
+                    </div>
+                    <a href="service-details.html" class="btn btn-primary btn-block">View Details</a>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="card" style="display: flex; flex-direction: column; gap: 12px; transition: all 0.2s;" onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='var(--shadow-md)'" onmouseout="this.style.transform=''; this.style.boxShadow=''">
+                    <div>
+                        <span class="badge badge-pending" style="margin-bottom: 10px; display: inline-block;">Tech Repair</span>
+                        <h3 style="font-size: 1.1rem; margin-bottom: 8px;">Macbook Formatting & Backup</h3>
+                        <div style="display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 8px;">
+                            <img src="https://i.pravatar.cc/150?img=15" alt="" style="width: 24px; border-radius: 50%;"> David M. — Eng Dept.
+                        </div>
+                        <p style="font-size: 0.9rem;">Complete macOS reinstall, data backup and performance tuning.</p>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 12px; border-top: 1px solid var(--border);">
+                        <span style="font-size: 1.2rem; font-weight: 700; color: var(--primary);">₹1200</span>
+                        <span class="rating"><i class="fa-solid fa-star"></i> 5.0 <span style="color: var(--text-muted); font-weight: 400;">(4)</span></span>
+                    </div>
+                    <a href="#" class="btn btn-primary btn-block">View Details</a>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="card" style="display: flex; flex-direction: column; gap: 12px; transition: all 0.2s;" onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='var(--shadow-md)'" onmouseout="this.style.transform=''; this.style.boxShadow=''">
+                    <div>
+                        <span class="badge" style="background: #fef9c3; color: #854d0e; margin-bottom: 10px; display: inline-block;">Food Delivery</span>
+                        <h3 style="font-size: 1.1rem; margin-bottom: 8px;">Late Night Campus Food Delivery</h3>
+                        <div style="display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 8px;">
+                            <img src="https://i.pravatar.cc/150?img=8" alt="" style="width: 24px; border-radius: 50%;"> Mike R. — Hostel B
+                        </div>
+                        <p style="font-size: 0.9rem;">I'll pick up food from campus eateries when you're studying late.</p>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 12px; border-top: 1px solid var(--border);">
+                        <span style="font-size: 1.2rem; font-weight: 700; color: var(--primary);">₹50 <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 400;">+ items</span></span>
+                        <span class="rating"><i class="fa-solid fa-star"></i> 4.7 <span style="color: var(--text-muted); font-weight: 400;">(28)</span></span>
+                    </div>
+                    <a href="#" class="btn btn-primary btn-block">View Details</a>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="js/script.js"></script>
+</body>
+</html>

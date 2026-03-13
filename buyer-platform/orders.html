@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Orders - CampusConnect</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .order-card { border-left: 4px solid var(--border); }
+        .order-card.active { border-left-color: var(--primary); }
+        .order-card.completed { border-left-color: var(--success); }
+
+        /* Review Modal */
+        .modal-overlay { display: none; position: fixed; inset:0; background: rgba(0,0,0,0.4); z-index: 100; align-items: center; justify-content: center; }
+        .modal-overlay.open { display: flex; }
+        .modal-box { background: white; border-radius: 16px; padding: 32px; width: 100%; max-width: 480px; }
+        #star-rating { font-size: 2rem; display: flex; justify-content: center; gap: 8px; margin: 16px 0; cursor: pointer; }
+        #star-rating i { color: var(--border); transition: color 0.15s; }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <i class="fa-solid fa-graduation-cap"></i> CampusMkt
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
+                <a href="browse.html" class="nav-item"><i class="fa-solid fa-compass"></i> Browse Services</a>
+                <a href="orders.html" class="nav-item active"><i class="fa-solid fa-bag-shopping"></i> My Orders</a>
+                <a href="chat.html" class="nav-item"><i class="fa-solid fa-comments"></i> Chat</a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="login.html" class="nav-item" style="color: var(--danger);"><i class="fa-solid fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="page-header">
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <button class="mobile-toggle" id="mobile-toggle"><i class="fa-solid fa-bars"></i></button>
+                    <h1 class="page-title">My Orders</h1>
+                </div>
+            </header>
+
+            <div style="display: flex; flex-direction: column; gap: 20px; max-width: 900px;">
+
+                <!-- Active Order -->
+                <div class="card order-card active" style="display: flex; justify-content: space-between; align-items: center;">
+                    <div style="display: flex; gap: 20px; align-items: center;">
+                        <div style="width: 52px; height: 52px; background: rgba(37,99,235,0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--primary); font-size: 1.4rem;">
+                            <i class="fa-solid fa-square-root-variable"></i>
+                        </div>
+                        <div>
+                            <h3 style="font-size: 1.1rem; margin-bottom: 4px;">Calculus 101 Mid-term Tutoring</h3>
+                            <div style="font-size: 0.85rem; color: var(--text-muted); display: flex; gap: 10px;">
+                                <span>#ORD-8921</span> •
+                                <span>Provider: Alex P.</span> •
+                                <span style="font-weight: 600; color: var(--text-dark);">₹500</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 10px;">
+                        <span class="badge badge-active">In Progress</span>
+                        <a href="chat.html" class="btn btn-secondary" style="padding: 7px 14px; font-size: 0.85rem;"><i class="fa-solid fa-comment"></i> Message</a>
+                    </div>
+                </div>
+
+                <!-- Completed Order -->
+                <div class="card order-card completed" style="display: flex; justify-content: space-between; align-items: center;">
+                    <div style="display: flex; gap: 20px; align-items: center;">
+                        <div style="width: 52px; height: 52px; background: #d1fae5; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--success); font-size: 1.4rem;">
+                            <i class="fa-solid fa-burger"></i>
+                        </div>
+                        <div>
+                            <h3 style="font-size: 1.1rem; margin-bottom: 4px;">Late Night Campus Food Delivery</h3>
+                            <div style="font-size: 0.85rem; color: var(--text-muted); display: flex; gap: 10px;">
+                                <span>#ORD-8810</span> •
+                                <span>Provider: Mike R.</span> •
+                                <span style="font-weight: 600; color: var(--text-dark);">₹230</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 10px;">
+                        <span class="badge badge-completed">Completed</span>
+                        <button class="btn btn-primary" style="padding: 7px 14px; font-size: 0.85rem;" onclick="document.getElementById('review-modal').classList.add('open')">
+                            <i class="fa-solid fa-star"></i> Leave Review
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Review Modal -->
+    <div class="modal-overlay" id="review-modal">
+        <div class="modal-box">
+            <h2 style="text-align: center; margin-bottom: 8px;">Rate Your Experience</h2>
+            <p style="text-align: center;">How was your Late Night Food Delivery from Mike R.?</p>
+            
+            <div id="star-rating">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+            </div>
+
+            <div class="form-group">
+                <textarea rows="3" placeholder="Write a brief comment (optional)..."></textarea>
+            </div>
+
+            <div style="display: flex; gap: 12px; margin-top: 8px;">
+                <button class="btn btn-secondary btn-block" onclick="document.getElementById('review-modal').classList.remove('open')">Cancel</button>
+                <button class="btn btn-primary btn-block" onclick="alert('Thank you for your review!'); document.getElementById('review-modal').classList.remove('open')">Submit</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
