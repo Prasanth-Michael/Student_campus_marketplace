@@ -3,33 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Provider Login - CampusMkt</title>
+    <title>Provider Login - CampusConnect</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body style="display: flex; justify-content: center; align-items: center; background-color: var(--secondary);">
-    <div class="card" style="width: 100%; max-width: 400px; padding: 40px; text-align: center;">
-        <div style="font-size: 2rem; color: var(--primary); margin-bottom: 24px; display: flex; align-items: center; justify-content: center; gap: 12px; font-weight: 700;">
-            <i class="fa-solid fa-graduation-cap"></i> CampusMkt
-        </div>
-        <h2 style="margin-bottom: 8px;">Provider Login</h2>
-        <p style="margin-bottom: 32px;">Login to manage your services and orders.</p>
+<body class="auth-body">
+    <div class="auth-wrapper">
+        <div class="auth-card card">
+            <div class="auth-topbar">
+                <a href="/" class="ghost-link"><i class="fa-solid fa-arrow-left"></i> Home</a>
+                <div class="auth-mini-links">
+                    <a href="/buyer-platform/login.html" class="auth-pill">Buyer Login</a>
+                    <a href="/buyer-platform/register.html" class="auth-pill">Buyer Register</a>
+                    <a href="/provider-dashboard/login.html" class="auth-pill is-active">Provider Login</a>
+                    <a href="/provider-dashboard/register.html" class="auth-pill">Provider Register</a>
+                </div>
+            </div>
 
-        <form id="login-form" style="text-align: left;">
-            <div class="form-group">
-                <label for="provider-email">Email Address</label>
-                <input id="provider-email" type="email" placeholder="provider@university.edu" required>
+            <div class="auth-brand">
+                <div class="brand-mark"><i class="fa-solid fa-briefcase"></i></div>
+                <div>
+                    <h1>Provider Login</h1>
+                    <p>Sign in to manage listings, accept orders, and talk to buyers.</p>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="provider-password">Password</label>
-                <input id="provider-password" type="password" placeholder="Enter password" required>
-            </div>
-            <button id="login-submit" type="submit" class="btn btn-primary btn-block" style="margin-top: 10px;">Sign In</button>
-        </form>
-        <p id="auth-status" style="margin-top: 16px; min-height: 24px;"></p>
-        <p style="margin-top: 16px;">
-            Need a provider account? <a href="register.html" style="color: var(--primary); font-weight: 600; text-decoration: none;">Register here</a>
-        </p>
+
+            <form id="login-form" class="auth-form">
+                <div class="form-group">
+                    <label for="provider-email">Email Address</label>
+                    <input id="provider-email" type="email" placeholder="provider@university.edu" required>
+                </div>
+                <div class="form-group">
+                    <label for="provider-password">Password</label>
+                    <input id="provider-password" type="password" placeholder="Enter password" required>
+                </div>
+                <button id="login-submit" type="submit" class="btn btn-primary btn-block">Sign In</button>
+            </form>
+            <p id="auth-status" class="auth-status"></p>
+            <p class="auth-footer-copy">Need a provider account? <a href="register.html">Register here</a></p>
+        </div>
     </div>
     <script src="../shared/app.js"></script>
     <script src="js/script.js"></script>

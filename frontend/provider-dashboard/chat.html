@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Provider Chat - CampusMkt</title>
+    <title>Provider Chat - CampusConnect</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/chat.css">
@@ -12,7 +12,7 @@
     <div class="app-container">
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
-                <i class="fa-solid fa-graduation-cap"></i> CampusMkt
+                <i class="fa-solid fa-graduation-cap"></i> CampusConnect
             </div>
             <nav class="sidebar-nav">
                 <a href="dashboard.html" class="nav-item"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
@@ -22,13 +22,13 @@
                 <a href="chat.html" class="nav-item active"><i class="fa-solid fa-comments"></i> Chat</a>
             </nav>
             <div class="sidebar-footer">
-                <a href="login.html" class="nav-item" data-action="logout" style="color: var(--danger);"><i class="fa-solid fa-sign-out-alt"></i> Logout</a>
+                <a href="login.html" class="nav-item" data-action="logout"><i class="fa-solid fa-sign-out-alt"></i> Logout</a>
             </div>
         </aside>
 
         <main class="main-content">
-            <header class="page-header" style="margin-bottom: 20px;">
-                <div style="display: flex; align-items: center; gap: 15px;">
+            <header class="page-header">
+                <div class="header-row">
                     <button class="mobile-toggle" id="mobile-toggle"><i class="fa-solid fa-bars"></i></button>
                     <h1 class="page-title">Messages</h1>
                 </div>
@@ -37,21 +37,21 @@
             <div class="chat-layout">
                 <div class="chat-contacts-panel">
                     <div class="chat-search-bar">
-                        <input id="conversation-search" type="text" placeholder="Search conversations..." style="border-radius: 20px; padding: 10px 14px;">
+                        <input id="conversation-search" type="text" placeholder="Search conversations...">
                     </div>
                     <div class="contact-list" id="conversation-list"></div>
                 </div>
 
                 <div class="chat-main">
                     <div class="chat-header-bar">
-                        <div style="display: flex; align-items: center; gap: 12px;">
-                            <img src="https://i.pravatar.cc/150?img=32" alt="Customer" style="width: 44px; border-radius: 50%;">
+                        <div class="header-row">
+                            <img src="https://i.pravatar.cc/150?img=32" alt="Customer" class="avatar-chip">
                             <div>
                                 <div id="chat-partner-name" style="font-weight: 700;">Select a conversation</div>
                                 <div id="chat-partner-status" style="font-size: 0.8rem; color: var(--success);"></div>
                             </div>
                         </div>
-                        <a id="chat-order-link" href="orders.html" class="btn btn-secondary" style="padding: 7px 14px; font-size: 0.85rem;">View Related Order</a>
+                        <a id="chat-order-link" href="orders.html" class="btn btn-secondary">View Related Order</a>
                     </div>
 
                     <div class="messages-area" id="chat-messages">

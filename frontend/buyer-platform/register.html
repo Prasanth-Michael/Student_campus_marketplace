@@ -7,16 +7,28 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body>
+<body class="auth-body">
     <div class="auth-wrapper">
-        <div class="card" style="width: 100%; max-width: 420px;">
-            <div style="text-align: center; margin-bottom: 28px;">
-                <div style="font-size: 1.5rem; font-weight: 700; color: var(--primary); display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 6px;">
-                    <i class="fa-solid fa-graduation-cap"></i> CampusConnect
+        <div class="auth-card card">
+            <div class="auth-topbar">
+                <a href="/" class="ghost-link"><i class="fa-solid fa-arrow-left"></i> Home</a>
+                <div class="auth-mini-links">
+                    <a href="/buyer-platform/login.html" class="auth-pill">Buyer Login</a>
+                    <a href="/buyer-platform/register.html" class="auth-pill is-active">Buyer Register</a>
+                    <a href="/provider-dashboard/login.html" class="auth-pill">Provider Login</a>
+                    <a href="/provider-dashboard/register.html" class="auth-pill">Provider Register</a>
                 </div>
-                <p>Create your buyer account</p>
             </div>
-            <form id="register-form">
+
+            <div class="auth-brand">
+                <div class="brand-mark"><i class="fa-solid fa-bag-shopping"></i></div>
+                <div>
+                    <h1>Create Buyer Account</h1>
+                    <p>Set up your student profile and start ordering services on campus.</p>
+                </div>
+            </div>
+
+            <form id="register-form" class="auth-form">
                 <div class="form-group">
                     <label for="buyer-name">Full Name</label>
                     <input id="buyer-name" type="text" placeholder="John Doe" required>
@@ -33,12 +45,10 @@
                     <label for="buyer-register-password">Password</label>
                     <input id="buyer-register-password" type="password" placeholder="Choose a password" required>
                 </div>
-                <button type="submit" class="btn btn-primary btn-block" id="register-submit" style="margin-top: 8px; padding: 13px;">Create Account</button>
+                <button type="submit" class="btn btn-primary btn-block" id="register-submit">Create Account</button>
             </form>
-            <p id="auth-status" style="text-align: center; margin-top: 16px; min-height: 24px;"></p>
-            <p style="text-align: center; margin-top: 20px;">
-                Already have an account? <a href="login.html" style="color: var(--primary); font-weight: 600; text-decoration: none;">Sign In</a>
-            </p>
+            <p id="auth-status" class="auth-status"></p>
+            <p class="auth-footer-copy">Already registered? <a href="login.html">Sign in here</a></p>
         </div>
     </div>
     <script src="../shared/app.js"></script>

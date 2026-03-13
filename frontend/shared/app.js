@@ -1,5 +1,12 @@
 (function initializeCampusApp() {
   const STORAGE_KEY = "campus-connect-auth";
+  const THEME = {
+    ink: "#37353E",
+    slate: "#44444E",
+    clay: "#715A5A",
+    mist: "#D3DAD9",
+    mistDark: "#B7C1C0"
+  };
 
   const safeJsonParse = (value) => {
     try {
@@ -84,7 +91,7 @@
     toast.style.color = "#fff";
     toast.style.fontSize = "0.95rem";
     toast.style.background =
-      type === "error" ? "#dc2626" : type === "success" ? "#16a34a" : "#2563eb";
+      type === "error" ? "#b91c1c" : type === "success" ? "#365947" : THEME.clay;
 
     container.appendChild(toast);
 
@@ -117,6 +124,9 @@
     const data = text ? safeJsonParse(text) || { message: text } : {};
 
     if (!response.ok) {
+      if (response.status === 401) {
+        clearSession();
+      }
       const error = new Error(data.message || "Request failed");
       error.status = response.status;
       error.data = data;
@@ -163,6 +173,62 @@
   const logout = (nextUrl) => {
     clearSession();
     authRedirect(nextUrl || "/");
+  };
+
+  const mountHistoryButtons = () => {
+    if (document.body.dataset.historyMounted === "true") {
+      return;
+    }
+
+    if (window.location.pathname === "/" || window.location.pathname.endsWith("/index.html")) {
+      return;
+    }
+
+    const rail = document.createElement("div");
+    rail.setAttribute("aria-label", "Page navigation");
+    rail.style.position = "fixed";
+    rail.style.left = "18px";
+    rail.style.bottom = "18px";
+    rail.style.zIndex = "9998";
+    rail.style.display = "flex";
+    rail.style.gap = "10px";
+
+    const buttons = [
+      {
+        label: "Back",
+        icon: "fa-arrow-left",
+        onClick: () => window.history.back()
+      },
+      {
+        label: "Forward",
+        icon: "fa-arrow-right",
+        onClick: () => window.history.forward()
+      },
+      {
+        label: "Home",
+        icon: "fa-house",
+        onClick: () => authRedirect("/")
+      }
+    ];
+
+    buttons.forEach((item) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.innerHTML = `<i class="fa-solid ${item.icon}"></i> ${item.label}`;
+      button.style.border = "1px solid rgba(211, 218, 217, 0.45)";
+      button.style.background = "rgba(55, 53, 62, 0.92)";
+      button.style.color = THEME.mist;
+      button.style.padding = "11px 14px";
+      button.style.borderRadius = "999px";
+      button.style.cursor = "pointer";
+      button.style.backdropFilter = "blur(14px)";
+      button.style.boxShadow = "0 18px 40px rgba(17, 18, 22, 0.28)";
+      button.addEventListener("click", item.onClick);
+      rail.appendChild(button);
+    });
+
+    document.body.appendChild(rail);
+    document.body.dataset.historyMounted = "true";
   };
 
   const statusToBadgeClass = (status) => {
@@ -217,7 +283,8 @@
     },
     utils: {
       getQueryParam,
-      startSocket
+      startSocket,
+      mountHistoryButtons
     }
   };
 })();

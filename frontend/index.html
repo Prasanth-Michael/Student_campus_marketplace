@@ -8,37 +8,46 @@
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
-
-    <div class="logo">
-        <i class="fa-solid fa-graduation-cap"></i> CampusConnect
-    </div>
-    <p class="subtitle">The Campus Service Marketplace — Buy or sell services right on campus.</p>
-
-    <div class="role-cards">
-
-        <!-- Buyer -->
-        <a href="buyer-platform/login.html" class="role-card">
-            <div class="role-icon">
-                <i class="fa-solid fa-bag-shopping"></i>
+    <main class="landing-shell">
+        <section class="hero-panel">
+            <div class="eyebrow">Campus service marketplace</div>
+            <div class="logo">
+                <i class="fa-solid fa-graduation-cap"></i> CampusConnect
             </div>
-            <h2>I'm a Buyer</h2>
-            <p>Browse campus services like tutoring, tech repair, food delivery, and more. Order and pay securely.</p>
-            <span class="go-btn">Go to Buyer <i class="fa-solid fa-arrow-right"></i></span>
-        </a>
+            <h1>One place for campus services, trusted orders, and direct buyer-provider chat.</h1>
+            <p class="subtitle">Run the whole marketplace from one app: publish services, discover providers, book work, pay with Razorpay, and chat in real time.</p>
 
-        <!-- Provider -->
-        <a href="provider-dashboard/login.html" class="role-card">
-            <div class="role-icon">
-                <i class="fa-solid fa-briefcase"></i>
+            <div class="quick-links">
+                <a href="buyer-platform/login.html" class="quick-chip">Buyer Login</a>
+                <a href="buyer-platform/register.html" class="quick-chip">Buyer Register</a>
+                <a href="provider-dashboard/login.html" class="quick-chip">Provider Login</a>
+                <a href="provider-dashboard/register.html" class="quick-chip">Provider Register</a>
             </div>
-            <h2>I'm a Provider</h2>
-            <p>Offer your skills and services to students on campus. Create listings, receive orders, and earn money.</p>
-            <span class="go-btn">Go to Provider <i class="fa-solid fa-arrow-right"></i></span>
-        </a>
+        </section>
 
-    </div>
+        <section class="role-cards">
+            <a href="buyer-platform/login.html" class="role-card">
+                <div class="role-icon">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                </div>
+                <div class="card-tag">For students</div>
+                <h2>I'm a Buyer</h2>
+                <p>Browse only real provider listings, place campus orders, track status, review completed work, and talk directly to the person you hired.</p>
+                <span class="go-btn">Enter Buyer App <i class="fa-solid fa-arrow-right"></i></span>
+            </a>
 
-    <p class="footer-note"><i class="fa-solid fa-shield-halved"></i> Secured platform — For campus use only.</p>
+            <a href="provider-dashboard/login.html" class="role-card">
+                <div class="role-icon">
+                    <i class="fa-solid fa-briefcase"></i>
+                </div>
+                <div class="card-tag">For freelancers</div>
+                <h2>I'm a Provider</h2>
+                <p>Create services, manage incoming orders, update status, and keep every buyer conversation attached to the right order workflow.</p>
+                <span class="go-btn">Enter Provider App <i class="fa-solid fa-arrow-right"></i></span>
+            </a>
+        </section>
 
+        <p class="footer-note"><i class="fa-solid fa-shield-halved"></i> Built for campus use with shared ordering, chat, and payment workflows.</p>
+    </main>
 </body>
 </html>

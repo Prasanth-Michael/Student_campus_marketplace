@@ -1,26 +1,38 @@
-/* orders.css — Buyer My Orders page */
-.order-card { border-left: 4px solid var(--border); }
-.order-card.active { border-left-color: var(--primary); }
-.order-card.completed { border-left-color: var(--success); }
+.order-card {
+    border-left: 5px solid rgba(68, 68, 78, 0.12);
+}
 
-/* Review Modal */
+.order-card.active {
+    border-left-color: var(--primary);
+}
+
+.order-card.completed {
+    border-left-color: var(--success);
+}
+
 .modal-overlay {
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(18, 18, 24, 0.52);
     z-index: 100;
     align-items: center;
     justify-content: center;
+    padding: 20px;
 }
-.modal-overlay.open { display: flex; }
+
+.modal-overlay.open {
+    display: flex;
+}
 
 .modal-box {
-    background: white;
-    border-radius: 16px;
+    background: rgba(237, 242, 241, 0.98);
+    border-radius: 28px;
     padding: 32px;
     width: 100%;
     max-width: 480px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: var(--shadow-md);
 }
 
 #star-rating {
@@ -28,9 +40,10 @@
     display: flex;
     justify-content: center;
     gap: 8px;
-    margin: 16px 0;
+    margin: 18px 0;
     cursor: pointer;
 }
+
 #star-rating i {
     color: var(--border);
     transition: color 0.15s;

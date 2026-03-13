@@ -1,5 +1,6 @@
 const crypto = require("crypto");
 
+const Conversation = require("../models/Conversation");
 const Order = require("../models/Order");
 const Service = require("../models/Service");
 const getRazorpayInstance = require("../../payment/razorpay");
@@ -57,6 +58,23 @@ const createOrder = async (req, res) => {
       quotedPrice: service.price,
       totalAmount: service.price
     });
+
+    await Conversation.findOneAndUpdate(
+      {
+        order: order._id
+      },
+      {
+        $setOnInsert: {
+          participants: [req.user._id, service.provider._id],
+          service: service._id,
+          order: order._id
+        }
+      },
+      {
+        new: true,
+        upsert: true
+      }
+    );
 
     const populatedOrder = await Order.findById(order._id)
       .populate("service", "title category price")

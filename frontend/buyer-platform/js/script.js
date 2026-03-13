@@ -40,11 +40,6 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const handleLogin = () => {
-        auth.redirectIfAuthenticated({
-            provider: "/provider-dashboard/dashboard.html",
-            buyer: buyerHome
-        });
-
         document.getElementById("login-form").addEventListener("submit", async (event) => {
             event.preventDefault();
             setStatusText("Signing in...");
@@ -67,11 +62,6 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const handleRegister = () => {
-        auth.redirectIfAuthenticated({
-            provider: "/provider-dashboard/dashboard.html",
-            buyer: buyerHome
-        });
-
         document.getElementById("register-form").addEventListener("submit", async (event) => {
             event.preventDefault();
             setStatusText("Creating account...");
@@ -343,7 +333,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         email: user.email
                     },
                     theme: {
-                        color: "#2563eb"
+                        color: "#715A5A"
                     },
                     modal: {
                         ondismiss: () => {
@@ -539,11 +529,67 @@ document.addEventListener("DOMContentLoaded", () => {
         const socket = utils.startSocket();
 
         let conversations = [];
-        let currentConversationId = null;
+        let currentConversationId = utils.getQueryParam("conversationId");
+
+        const sendButton = chatForm ? chatForm.querySelector('[type="submit"]') : null;
+        const defaultThreadMessage = "Choose an order or conversation to start chatting.";
+
+        const setComposerState = (enabled, placeholder) => {
+            if (chatInput) {
+                chatInput.disabled = !enabled;
+                chatInput.placeholder = placeholder;
+            }
+
+            if (sendButton) {
+                sendButton.disabled = !enabled;
+            }
+        };
+
+        const getOtherParticipant = (conversation) => {
+            return conversation.participants.find((participant) => participant._id !== user._id) || conversation.participants[0];
+        };
+
+        const setChatShell = ({ name, status, linkText, linkHref }) => {
+            chatPartnerName.textContent = name;
+            chatPartnerStatus.textContent = status;
+            chatOrderLink.textContent = linkText;
+            chatOrderLink.href = linkHref;
+        };
+
+        const renderEmptyThread = (message = defaultThreadMessage) => {
+            setChatShell({
+                name: "Select a conversation",
+                status: "",
+                linkText: "Browse Services",
+                linkHref: "browse.html"
+            });
+
+            chatMessages.innerHTML = `
+                <div class="message received">
+                    <div class="msg-bubble">${escapeHtml(message)}</div>
+                </div>
+            `;
+            setComposerState(false, "Select a conversation to start messaging");
+        };
+
+        const renderMessages = (messages) => {
+            chatMessages.innerHTML = messages.length ? messages.map((message) => `
+                <div class="message ${message.sender._id === user._id ? "sent" : "received"}">
+                    <div class="msg-bubble">${escapeHtml(message.text)}</div>
+                    <span class="msg-time">${new Date(message.createdAt).toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" })}</span>
+                </div>
+            `).join("") : `
+                <div class="message received">
+                    <div class="msg-bubble">No messages yet. Send the first message for this order.</div>
+                </div>
+            `;
+
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        };
 
         const renderConversationList = (items) => {
             conversationList.innerHTML = items.length ? items.map((conversation) => {
-                const other = conversation.participants.find((participant) => participant._id !== user._id) || conversation.participants[0];
+                const other = getOtherParticipant(conversation);
                 return `
                     <div class="contact-item ${conversation._id === currentConversationId ? "active" : ""}" data-conversation-id="${conversation._id}">
                         <img src="https://i.pravatar.cc/150?img=11" alt="${escapeHtml(other.name)}">
@@ -567,7 +613,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const fetchConversations = async () => {
             const response = await api.request("/api/chat/conversations");
-            conversations = response.conversations;
+            conversations = response.conversations || [];
             const query = conversationSearch.value.trim().toLowerCase();
             const filtered = query
                 ? conversations.filter((conversation) =>
@@ -579,30 +625,86 @@ document.addEventListener("DOMContentLoaded", () => {
             renderConversationList(filtered);
         };
 
-        const loadConversation = async (conversationId) => {
+        const findPreferredConversation = () => {
+            if (currentConversationId) {
+                const currentConversation = conversations.find((item) => item._id === currentConversationId);
+                if (currentConversation) {
+                    return currentConversation;
+                }
+            }
+
+            const queryOrderId = utils.getQueryParam("orderId");
+            if (queryOrderId) {
+                const orderConversation = conversations.find(
+                    (item) => item.order && item.order._id === queryOrderId
+                );
+                if (orderConversation) {
+                    return orderConversation;
+                }
+            }
+
+            const queryParticipantId = utils.getQueryParam("participantId");
+            if (queryParticipantId) {
+                const participantConversation = conversations.find((item) =>
+                    item.participants.some((participant) => participant._id === queryParticipantId)
+                );
+                if (participantConversation) {
+                    return participantConversation;
+                }
+            }
+
+            return conversations[0] || null;
+        };
+
+        const updateConversationUrl = (conversationId) => {
+            const nextUrl = new URL(window.location.href);
+            nextUrl.searchParams.set("conversationId", conversationId);
+            nextUrl.searchParams.delete("participantId");
+            nextUrl.searchParams.delete("serviceId");
+            window.history.replaceState({}, "", nextUrl);
+        };
+
+        const loadConversation = async (conversationId, options = {}) => {
+            const { refreshList = true } = options;
             currentConversationId = conversationId;
-            await fetchConversations();
+            if (refreshList) {
+                await fetchConversations();
+            }
+
+            const current = conversations.find((item) => item._id === conversationId);
+            if (!current) {
+                currentConversationId = null;
+                renderConversationList(conversations);
+                renderEmptyThread("This conversation is no longer available.");
+                return;
+            }
 
             const { messages } = await api.request(`/api/chat/conversations/${conversationId}/messages`);
-            const current = conversations.find((item) => item._id === conversationId);
-            const other = current.participants.find((participant) => participant._id !== user._id) || current.participants[0];
+            const other = getOtherParticipant(current);
 
-            chatPartnerName.textContent = other.name;
-            chatPartnerStatus.textContent = current.order ? `Order: ${renderOrderStatus(current.order.status)}` : "Direct conversation";
-            chatOrderLink.textContent = current.order ? "View Related Order" : "Browse Services";
-            chatOrderLink.href = current.order ? "orders.html" : "browse.html";
-
-            chatMessages.innerHTML = messages.length ? messages.map((message) => `
-                <div class="message ${message.sender._id === user._id ? "sent" : "received"}">
-                    <div class="msg-bubble">${escapeHtml(message.text)}</div>
-                    <span class="msg-time">${new Date(message.createdAt).toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" })}</span>
-                </div>
-            `).join("") : "<div class='message received'><div class='msg-bubble'>No messages yet.</div></div>";
-
-            chatMessages.scrollTop = chatMessages.scrollHeight;
+            setChatShell({
+                name: other.name,
+                status: current.order ? `Order: ${renderOrderStatus(current.order.status)}` : "Direct conversation",
+                linkText: current.order ? "View Related Order" : "Browse Services",
+                linkHref: current.order ? "orders.html" : "browse.html"
+            });
+            setComposerState(true, "Type a message...");
+            renderMessages(messages);
+            renderConversationList(
+                conversationSearch.value.trim()
+                    ? conversations.filter((conversation) =>
+                        conversation.participants.some((participant) =>
+                            participant._id !== user._id &&
+                            participant.name.toLowerCase().includes(conversationSearch.value.trim().toLowerCase())
+                        )
+                    )
+                    : conversations
+            );
+            updateConversationUrl(conversationId);
 
             if (socket) {
                 socket.emit("conversation:join", conversationId);
+                socket.emit("message:read", { conversationId });
             }
         };
 
@@ -628,10 +730,15 @@ document.addEventListener("DOMContentLoaded", () => {
             currentConversationId = response.conversation._id;
         };
 
+        renderEmptyThread();
+
         chatForm.addEventListener("submit", async (event) => {
             event.preventDefault();
             const text = chatInput.value.trim();
             if (!text || !currentConversationId) {
+                if (!currentConversationId) {
+                    ui.showMessage("Open a conversation first.", "error");
+                }
                 return;
             }
 
@@ -662,23 +769,47 @@ document.addEventListener("DOMContentLoaded", () => {
             socket.on("message:new", async ({ conversationId }) => {
                 await fetchConversations();
                 if (conversationId === currentConversationId) {
-                    await loadConversation(conversationId);
+                    await loadConversation(conversationId, { refreshList: false });
+                } else if (!currentConversationId) {
+                    const preferredConversation = findPreferredConversation();
+                    if (preferredConversation) {
+                        await loadConversation(preferredConversation._id, { refreshList: false });
+                    }
                 }
+            });
+
+            socket.on("conversation:updated", async ({ conversationId }) => {
+                await fetchConversations();
+                if (!currentConversationId || currentConversationId === conversationId) {
+                    const preferredConversation = findPreferredConversation();
+                    if (preferredConversation) {
+                        await loadConversation(preferredConversation._id, { refreshList: false });
+                    }
+                }
+            });
+
+            socket.on("chat:error", ({ message }) => {
+                ui.showMessage(message, "error");
             });
         }
 
         try {
             await maybeCreateConversation();
             await fetchConversations();
-            if (currentConversationId) {
-                await loadConversation(currentConversationId);
+            const preferredConversation = findPreferredConversation();
+            if (preferredConversation) {
+                await loadConversation(preferredConversation._id, { refreshList: false });
+            } else {
+                renderEmptyThread();
             }
         } catch (error) {
             ui.showMessage(error.message, "error");
+            renderEmptyThread(error.message);
         }
     };
 
     setupLayout();
+    utils.mountHistoryButtons();
     initializeReviewModal();
 
     if (page === "login.html") handleLogin();
